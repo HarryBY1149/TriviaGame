@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    //The questions and their respective answers
     var dataArr = [
         {
             Question: "Beethoven was so meticulous, he would count 60 of these every time he had a cup",
@@ -39,7 +40,7 @@ $(document).ready(function () {
             ]
         },
         {
-            Question: "Wagner enjoyed what unusual pasttime?",
+            Question: "Wagner enjoyed what unusual pastime?",
             Answers: [
                 "Cross-Dressing",
                 "Skinny Dipping",
@@ -57,7 +58,7 @@ $(document).ready(function () {
             ]
         },
         {
-            Question: "Tchaikovsky was known to hold onto what part of his body, believing it would fall off while he was conducting?",
+            Question: "Tchaikovsky was known to hold onto what part of his body while he was conducting, believing it would fall off?",
             Answers: [
                 "His Head",
                 "His Left Arm",
@@ -104,20 +105,28 @@ $(document).ready(function () {
     function nextQuestion() {
         function reset() {
             $("#displayCont").empty();
-            $("#displayCont").html(`<span id="timer"></span>
-        <span id="questionDisp"></span><br>
-        <ul id="answerDisp"></ul>`);
+            $("#displayCont").html(`<div class="row"><div class="col-md-12 text-center" id="timer"></div></div>
+        <div class="row" id="questionDisp"></div>
+        <div class="row mt-2"><ul class="col-md-10 mx-auto mt-2" id="answerDisp"></ul></div>`);
         }
         reset();
+
         getData();
     };
 
     function correctAnswer() {
         $("#displayCont").empty();
-        $("#displayCont").html(`<h1>Congratulations! You chose the right answer</h1><br><img src="assets/images/Celebration.gif" alt="Victory Dance!"/>`);
+        $("#displayCont").html(
+            `<div class="row"><h1 class="col-md-12 text-center">Congratulations! You chose the right answer</h1></div>
+            <div class="row mt-2"><img class="img-fluid max-width:500px; max-height:300px; mx-auto mt-2" src="assets/images/Celebration.gif" alt="Victory Dance!"/></div>`);
         i++;
         clearInterval(timerInt);
-        setTimeout(nextQuestion, 3000);
+        if (i < 10) {
+            setTimeout(nextQuestion, 2200);
+        } else {
+            console.log("trigger works")
+            endScreen();
+        }
     };
 
     function timer() {
@@ -127,20 +136,35 @@ $(document).ready(function () {
             clearInterval(timerInt);
             incorrect++;
             $("#displayCont").empty();
-            $("#displayCont").html(`<h1> Time's Up!</h1><br><h2>The correct answer was ${dataArr[i].Answers[0]}</h2><img src="assets/images/Failure.gif" alt="Dance Fail" />`);
+            $("#displayCont").html(
+                `<div class="row"><h1 class="col-md-12 text-center"> Time's Up!</h1></div>
+                <div class="row mt-2"><h2 class="col-md-12 text-center">The correct answer was ${dataArr[i].Answers[0]}</h2></div>
+                <div class="row"><img class="img-fluid max-width:320px; max-height:240px; mx-auto mt-2" src="assets/images/Failure.gif" alt="Dance Fail" /></div>`);
             i++;
-            setTimeout(nextQuestion, 2200);
+            if (i < 10) {
+                setTimeout(nextQuestion, 2200);
+            } else {
+                console.log("trigger works")
+                endScreen();
+            }
         }
     };
 
     function wrongAnswer() {
         $("#displayCont").empty();
-        $("#displayCont").html(`<h1> Oh no!</h1><h2>The correct answer was ${dataArr[i].Answers[0]}</h2><img src="assets/images/Oops.gif"/>`);
+        $("#displayCont").html(
+            `<div class="row"><h1 class="col-md-12 text-center"> Oh no!</h1></div>
+            <div="row mt-2"><h2 class="col-md-12 text-center">The correct answer was ${dataArr[i].Answers[0]}</h2></div>
+            <div class="row"><img class="img-fluid max-width:500px; max-height:286px; mx-auto mt-2"  src="assets/images/Oops.gif"/></div>`);
         i++;
         clearInterval(timerInt);
-        setTimeout(nextQuestion, 3000);
+        if (i < 10) {
+            setTimeout(nextQuestion, 2200);
+        } else {
+            endScreen();
+        }
     };
-   
+
     function answerSelect() {
         $("#0").on("click", function () {
             correct++;
@@ -160,10 +184,24 @@ $(document).ready(function () {
         });
     }
 
+    function endScreen() {
+            $("#displayCont").empty();
+            $("#displayCont").html(
+                `<div class="row"><h1 class="col-md-10 text-center mx-auto">Congratulations, you've reached the end!</h1></div>
+            <div class="row"><h2 class="col-md-10 text-center mx-auto">Here's how you scored:</h2></div>
+            <div class="row"><p class="col-md-10 text-center mx-auto">Correct answers: ${correct}</p></div>
+            <div class="row"><p class="col-md-10 text-center mx-auto">Incorrect answers: ${incorrect}</p></div>
+            <div class="row"><button type="button" class="btn btn-primary mx-auto" id="reset">Try Again?</button>`)
+            $("#reset").on("click", function(){
+                i=1;
+                nextQuestion();
+            })
+    }
+
     function getData() {
         $("#questionDisp").empty();
         $("#answerDisp").empty();
-        $("#questionDisp").append(`<h2>${dataArr[i].Question}</h2>`);
+        $("#questionDisp").append(`<div class="row"><h2 class="col-md-12 text-center">${dataArr[i].Question}</h2></div>`);
         function answerDisp() {
             //A Fisher-Yates Shuffle to randomize the position of the answers
             var nums = [0, 1, 2, 3]
@@ -188,16 +226,16 @@ $(document).ready(function () {
             for (j = 0; j < nums.length; j++) {
                 switch (nums[j]) {
                     case 0:
-                        $("#answerDisp").append(`<li id="0">` + dataArr[i].Answers[nums[j]] + `</li>`);
+                        $("#answerDisp").append(`<div class="row"><li class="col-md-10 mx-auto" id="0"><p>` + dataArr[i].Answers[nums[j]] + `</p></li></div>`);
                         break;
                     case 1:
-                        $("#answerDisp").append(`<li id="1">` + dataArr[i].Answers[nums[j]] + `</li>`);
+                        $("#answerDisp").append(`<div class="row"><li class="col-md-10 mx-auto" id="1"><p>` + dataArr[i].Answers[nums[j]] + `</p></li></div>`);
                         break;
                     case 2:
-                        $("#answerDisp").append(`<li id="2">` + dataArr[i].Answers[nums[j]] + `</li>`);
+                        $("#answerDisp").append(`<div class="row"><li class="col-md-10 mx-auto" id="2"><p>` + dataArr[i].Answers[nums[j]] + `</p></li></div>`);
                         break;
                     case 3:
-                        $("#answerDisp").append(`<li id="3">` + dataArr[i].Answers[nums[j]] + `</li>`);
+                        $("#answerDisp").append(`<div class="row"><li class="col-md-10 mx-auto" id="3"><p>` + dataArr[i].Answers[nums[j]] + `</p></li></div>`);
                 }
             }
         }
@@ -209,7 +247,7 @@ $(document).ready(function () {
     }
     getData()
 
-    
+
 
 
 })
