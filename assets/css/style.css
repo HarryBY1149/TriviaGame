@@ -1,0 +1,35 @@
+body {
+    background: url("../images/Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+#header {
+    background-color: white;
+    border-bottom: 2px solid mediumvioletred;
+    padding-bottom: 20px;
+    color: rgb(59, 4, 59);
+}
+
+#displayCont {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-left: 2px solid mediumvioletred;
+    border-right: 2px solid mediumvioletred;
+}
+
+h1, h2, p, #timer{
+    color: rgb(59, 4, 59);
+    font-family: 'Lobster', cursive;
+}
+
+h1 {
+    font-size: 4rem; 
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+p, #timer {
+    font-size: 1.5rem;
+}

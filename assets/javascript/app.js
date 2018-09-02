@@ -191,7 +191,9 @@ $(document).ready(function () {
             <div class="row"><h2 class="col-md-10 text-center mx-auto">Here's how you scored:</h2></div>
             <div class="row"><p class="col-md-10 text-center mx-auto">Correct answers: ${correct}</p></div>
             <div class="row"><p class="col-md-10 text-center mx-auto">Incorrect answers: ${incorrect}</p></div>
-            <div class="row"><button type="button" class="btn btn-primary mx-auto" id="reset">Try Again?</button>`)
+            <div class="row"><button type="button" class="btn btn-primary mx-auto" id="reset">Try Again?</button>`);
+            correct=0;
+            incorrect=0;
             $("#reset").on("click", function(){
                 i=1;
                 nextQuestion();
