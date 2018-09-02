@@ -100,8 +100,7 @@ $(document).ready(function () {
     var timeRem;
     var timerInt;
 
-    //functions: nextQuestion() resets the html for getData; getData generates the questions and answers; correctAnswer does stuff if the user selects the correct answer
-    //wrongAnswer does stuff if the user selects the wrong answer; timer times things; answerSelect does stuff with user input; 
+    
     function nextQuestion() {
         function reset() {
             $("#displayCont").empty();
@@ -124,7 +123,6 @@ $(document).ready(function () {
         if (i < 10) {
             setTimeout(nextQuestion, 2200);
         } else {
-            console.log("trigger works")
             endScreen();
         }
     };
@@ -144,7 +142,6 @@ $(document).ready(function () {
             if (i < 10) {
                 setTimeout(nextQuestion, 2200);
             } else {
-                console.log("trigger works")
                 endScreen();
             }
         }
