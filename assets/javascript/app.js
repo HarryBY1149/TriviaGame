@@ -96,7 +96,7 @@ $(document).ready(function () {
 
     var correct = 0;
     var incorrect = 0;
-    var i = 1;
+    var i = 0;
     var timeRem;
     var timerInt;
 
@@ -192,7 +192,7 @@ $(document).ready(function () {
             correct=0;
             incorrect=0;
             $("#reset").on("click", function(){
-                i=1;
+                i=0;
                 nextQuestion();
             })
     }
